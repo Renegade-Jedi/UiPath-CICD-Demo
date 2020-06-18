@@ -14,7 +14,7 @@ stages:
         pool:
           vmImage: "windows-latest"
         container:
-          image: uipathcicddemo.azurecr.io/renegadejediuipathdockerdevops
+          image: uipathcicddemo.azurecr.io/renegadejediuipathdockerdevops:23
           endpoint: uipathcicddemo
 
         steps:
