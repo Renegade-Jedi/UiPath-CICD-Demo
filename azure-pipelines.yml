@@ -1,0 +1,29 @@
+
+trigger:
+  - master
+variables:
+  - group: uipath-cicd
+  - name: agent.preferPowerShellOnContainers
+    value: "True"
+
+stages:
+  - stage: Build
+    displayName: Create build artifact
+    jobs:
+      - job: BuildArtifact
+        pool:
+          vmImage: "windows-latest"
+        container:
+          image: uipathcicddemo.azurecr.io/renegadejediuipathdockerdevops:23
+          endpoint: uipathcicddemo-7234
+
+        steps:
+          - script: C:\UiPath\UiRobot.exe pack $(Build.SourcesDirectory)\project.json -o $(Build.ArtifactStagingDirectory)\ -v 1.0.$(Build.BuildNumber)
+            displayName: "Build the artifact"
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: drop
+            displayName: Download build artifact on build agent
+          - powershell: |
+              Import-Module UiPath.Powershell
+              $token = Get-UiPathAuthToken -ClientId $(uatClientId) -UserKey $(uatUserKey) -AccountName $(uatAccountName) -CloudDeployment 'Production' -TenantName $(uatTenantName)
+              Add-UiPathPackage -PackageFile $(Pipeline.Workspace)\drop\MessageBoxProcess.1.0.$(Build.BuildNumber).nupkg -AuthToken $token
