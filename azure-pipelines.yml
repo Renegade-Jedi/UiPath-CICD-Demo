@@ -1,0 +1,20 @@
+
+trigger:
+- master
+variables:
+  - group: uipath-cicd
+  - name: agent.preferPowerShellOnContainers
+    value: 'True'
+
+pool:
+  vmImage: 'windows-latest'
+container:
+  image: uipathcicddemo.azurecr.io/renegadejediuipathdockerdevops:23
+  endpoint: uipathcicddemo
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+  displayName: 'Build the artifact'
