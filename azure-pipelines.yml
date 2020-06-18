@@ -19,5 +19,5 @@ steps:
 - powershell: |
     Import-Module UiPath.PowerShell
     $token = Get-UiPathAuthToken -ClientId $(clientId_TK_DEV) -UserKey $(userKey_TK_DEV) -AccountName $(accountName_TK_DEV) -CloudDeployment 'Production' -TenantName $(tenantName_TK_DEV)
-    Add-UiPathPackage -PackageFile $(Build.ArtifactStagingDirectory)\MessageBox.$(Build.BuildNumber).nupkg -AuthToken $token
+    Add-UiPathPackage -PackageFile $(Build.ArtifactStagingDirectory)\TestMessageBoxOnlyProcess.$(Build.BuildNumber).nupkg -AuthToken $token
 
