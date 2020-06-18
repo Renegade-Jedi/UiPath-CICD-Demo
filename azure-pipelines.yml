@@ -22,8 +22,8 @@ stages:
             displayName: "Build the artifact"
           - publish: $(Build.ArtifactStagingDirectory)
             artifact: drop
-            
- - stage: DeployUat
+
+  - stage: DeployUat
     displayName: Deploy build artifact to UAT
     dependsOn: Build
     condition: succeeded()
