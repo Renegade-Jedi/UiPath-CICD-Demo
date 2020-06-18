@@ -15,7 +15,7 @@ stages:
           vmImage: "windows-latest"
         container:
           image: uipathcicddemo.azurecr.io/renegadejediuipathdockerdevops:23
-          endpoint: uipathcicddemo
+          endpoint: uipathcicddemo-7234
 
         steps:
           - script: C:\UiPath\UiRobot.exe pack $(Build.SourcesDirectory)\project.json -o $(Build.ArtifactStagingDirectory)\ -v 1.0.$(Build.BuildNumber)
