@@ -13,8 +13,8 @@ container:
   endpoint: uipathcicddemo
 steps:
 - script: C:\UiPath\UiRobot.exe pack $(Build.SourcesDirectory)\project.json -o $(Build.ArtifactStagingDirectory)\ -v 1.0.$(Build.BuildNumber)
-  displayName: 'Build the artifact'
-- publish: $(Build.ArtifactStagingDirectory) .
+  displayName: 'Build the artifact from: $(Build.ArtifactStagingDirectory)'
+- publish: $(Build.ArtifactStagingDirectory)
   artifact: drop
 - powershell: |
     Import-Module UiPath.PowerShell
