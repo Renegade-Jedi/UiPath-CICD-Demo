@@ -12,8 +12,10 @@ container:
   image: uipathcicddemo.azurecr.io/renegadejediuipathdockerdevops:23
   endpoint: uipathcicddemo
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- script: C:\UiPath\UiRobot.exe pack $(Build.SourcesDirectory)\project.json -o $(Build.ArtifactStagingDirectory)\ -v 1.0.$(Build.BuildNumber)
+  displayName: 'Build the artifact'
+- publish: $(Build.ArtifactStagingDirectory)
+  artifact: drop
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
