@@ -15,9 +15,9 @@ steps:
 - script: C:\UiPath\UiRobot.exe pack $(Build.SourcesDirectory)\project.json -o $(Build.ArtifactStagingDirectory)\ -v 1.0.$(Build.BuildNumber)
   displayName: 'Build the artifact'
 - publish: $(Build.ArtifactStagingDirectory)
-    echo $(Build.ArtifactStagingDirectory)
   artifact: drop
+- powershell: |
+    Import-Module UiPath.PowerShell
+    $token = Get-UiPathAuthToken -ClientId $(clientId_TK_DEV) -UserKey $(userKey_TK_DEV) -AccountName $(accountName_TK_DEV) -CloudDeployment 'Production' -TenantName $(tenantName_TK_DEV)
+    Add-UiPathPackage -PackageFile $(Build.ArtifactStagingDirectory)\MessageBox.$(Build.BuildNumber).nupkg -AuthToken $token
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-  displayName: 'test'
