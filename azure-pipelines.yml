@@ -2,9 +2,9 @@
 trigger:
 - master
 variables:
-  - group: uipath-cicd
-  - name: agent.preferPowerShellOnContainers
-    value: 'True'
+- group: uipath-cicd
+- name: agent.preferPowerShellOnContainers
+  value: 'True'
 
 pool:
   vmImage: 'windows-latest'
@@ -15,8 +15,9 @@ steps:
 - script: C:\UiPath\UiRobot.exe pack $(Build.SourcesDirectory)\project.json -o $(Build.ArtifactStagingDirectory)\ -v 1.0.$(Build.BuildNumber)
   displayName: 'Build the artifact'
 - publish: $(Build.ArtifactStagingDirectory)
+    echo $(Build.ArtifactStagingDirectory)
   artifact: drop
 
 - script: |
     echo Add other tasks to build, test, and deploy your project.
-  displayName: 'Build the artifact'
+  displayName: 'test'
